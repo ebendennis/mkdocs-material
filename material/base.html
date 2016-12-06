@@ -62,11 +62,17 @@
       <link rel="stylesheet" href="{{ base_url }}/assets/stylesheets/palettes-d790dcf0d5.css">
     {% endif %}
     {% if config.extra.font != "none" %}
+      {% set header = config.extra.get("font", {}).header | default("Ubuntu") %}
       {% set text = config.extra.get("font", {}).text | default("Ubuntu") %}
       {% set code = config.extra.get("font", {}).code | default("Ubuntu Mono") %}
+      {% set headerfont = header + ':300,400,500,700|' + code | replace(' ', '+') %}
       {% set font = text + ':300,400,500,700|' + code | replace(' ', '+') %}
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family={{ headerfont }}">
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family={{ font }}">
       <style>
+        h1,h2,h3,h4,h5,h6 {
+          font-family: '{{ header }}', Helvetica, Arial, sans-serif;
+        }
         body, input {
           font-family: '{{ text }}', Helvetica, Arial, sans-serif;
         }
